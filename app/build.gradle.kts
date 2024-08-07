@@ -48,4 +48,10 @@ dependencies {
 
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
+
+    // Feature module Support
+    implementation (libs.navigation.dynamic.features.fragment)
+
+    // Testing Navigation
+    androidTestImplementation (libs.navigation.testing)
 }
