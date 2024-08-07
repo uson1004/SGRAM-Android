@@ -20,6 +20,8 @@ public class ApiProvider {
     public static AuthApi getAuthApi() {
         return getRetrofit().create(AuthApi.class);
     }
+
+
 }
 
 

@@ -5,17 +5,16 @@ import com.example.sgram.data.request.LoginRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface AuthApi {
     @POST("/join")
-    Call<JoinRequest> SignIn(
+    Call<JoinRequest> Join(
             @Body JoinRequest signInRequest
     );
 
     @POST("/login")
-    Call<LoginRequest> SignUp(
+    Call<LoginRequest> login(
         @Body LoginRequest loginRequest
     );
 }
