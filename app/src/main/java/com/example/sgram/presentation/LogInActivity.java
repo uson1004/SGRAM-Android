@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-    public class LogInActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,6 @@ import retrofit2.Response;
 
         ActivityLogInBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_log_in);
         Intent mainIntent = new Intent(this, JoinActivity.class);
-
-        //binding.logInText.setOnClickListener(v -> startActivity(mainIntent));
 
         binding.logInButton.setOnClickListener(v -> {
             String id = binding.idTx.getText().toString();

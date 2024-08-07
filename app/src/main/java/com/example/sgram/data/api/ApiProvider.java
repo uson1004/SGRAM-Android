@@ -21,7 +21,9 @@ public class ApiProvider {
         return getRetrofit().create(AuthApi.class);
     }
 
-
+    public static ChatApi getChatApi() {
+        return getRetrofit().create(ChatApi.class);
+    }
 }
 
 
