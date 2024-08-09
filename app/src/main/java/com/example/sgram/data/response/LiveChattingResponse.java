@@ -21,7 +21,6 @@ public class LiveChattingResponse {
         this.contents = contents;
     }
 
-
     public String getContents() {
         return contents;
     }

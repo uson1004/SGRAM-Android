@@ -25,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
         ChatApi chatApi = ApiProvider.getChatApi();
 
         binding.chattingText.setOnClickListener(v -> {
-            LiveChattingResponse liveChattingResponse = new LiveChattingResponse("", "", "");
-            TokenResponse tokenResponse = new TokenResponse("");
+                LiveChattingResponse liveChattingResponse = new LiveChattingResponse("", "", "");
+                TokenResponse tokenResponse = new TokenResponse("");
         });
+
 
     }
 }

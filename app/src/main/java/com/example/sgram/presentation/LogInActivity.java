@@ -3,6 +3,7 @@
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_log_in);
+
+
 
         ActivityLogInBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_log_in);
         Intent mainIntent = new Intent(this, JoinActivity.class);

@@ -1,8 +1,12 @@
 package com.example.sgram.data.response;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LoginResponse {
+    @SerializedName("access_token")
     private String access_token;
 
+    @SerializedName("refresh_token")
     private String refresh_token;
 
     public LoginResponse(String access_token, String refresh_token) {

@@ -8,5 +8,22 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ChattingActivity">
 
+        <EditText
+            android:id="@+id/chat_insert"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:hint="채팅 입력하기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/submit_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제출"
+            app:layout_constraintStart_toEndOf="@id/chat_insert"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
