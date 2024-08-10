@@ -2,6 +2,8 @@ package com.example.sgram.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -14,6 +16,8 @@ import com.example.sgram.data.api.ApiProvider;
 import com.example.sgram.data.api.AuthApi;
 import com.example.sgram.data.request.JoinRequest;
 import com.example.sgram.databinding.ActivityJoinBinding;
+
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,17 +42,57 @@ public class JoinActivity extends AppCompatActivity {
             JoinRequest joinRequest = new JoinRequest(id, pw, phone);
             AuthApi authApi = ApiProvider.getAuthApi();
 
-            authApi.Join(joinRequest).enqueue(new Callback<JoinRequest>() {
+            binding.pwdTx.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void onResponse(@NonNull Call<JoinRequest> call, @NonNull Response<JoinRequest> response) {
-                    startActivity(loginIntent);
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
                 }
 
                 @Override
-                public void onFailure(@NonNull Call<JoinRequest> call, @NonNull Throwable t) {
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    String password = "[a-z|]";
+                    if (Pattern.matches(password, s)) {
+                    }
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+
+            authApi.Join(joinRequest).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                    int code = response.code();
+
+                    switch (code) {
+                        case 201 : {
+                            //Toast.makeText("");
+                            startActivity(loginIntent);
+                            break;
+                        }
+
+                        case 400: {
+                            break;
+                        }
+
+                        case 409: {
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                     Toast.makeText(JoinActivity.this, "정보를 다시 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
             });
         });
     }
+
+    // textview, imageview, recyclerview ~~view :: tv, img, rv
+    // button, image :: btn
+    // ConstraintLayout, LinearLayout, FrameLayout :: constraint, linear,
 }

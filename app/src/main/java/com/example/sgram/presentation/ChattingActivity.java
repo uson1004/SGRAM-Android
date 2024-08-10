@@ -1,8 +1,6 @@
 package com.example.sgram.presentation;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,16 +21,12 @@ public class ChattingActivity extends AppCompatActivity {
 
         ActivityChattingBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_chatting);
 
-        //LiveChattingRequest liveChattingRequest = new LiveChattingRequest()
         ChatApi chatApi = ApiProvider.getChatApi();
 
-        binding.submitBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = binding.chatInsert.getText().toString();
+        binding.submitBt.setOnClickListener(v -> {
+            String text = binding.chatInsert.getText().toString();
 
-                Toast.makeText(ChattingActivity.this, "", Toast.LENGTH_SHORT).show();
-            }
+
         });
     }
 }

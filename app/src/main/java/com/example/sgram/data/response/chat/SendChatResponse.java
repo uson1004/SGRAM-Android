@@ -1,4 +1,4 @@
-package com.example.sgram.data.response;
+package com.example.sgram.data.response.chat;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -14,8 +14,10 @@ import androidx.databinding.DataBindingUtil;
 import com.example.sgram.R;
 import com.example.sgram.data.api.ApiProvider;
 import com.example.sgram.data.api.AuthApi;
+import com.example.sgram.data.local.SharedPreferenceManager;
 import com.example.sgram.data.request.JoinRequest;
 import com.example.sgram.data.request.LoginRequest;
+import com.example.sgram.data.response.user.LoginResponse;
 import com.example.sgram.databinding.ActivityJoinBinding;
 import com.example.sgram.databinding.ActivityLogInBinding;
 
@@ -31,8 +33,6 @@ public class LogInActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_log_in);
 
-
-
         ActivityLogInBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_log_in);
         Intent mainIntent = new Intent(this, JoinActivity.class);
 
@@ -44,15 +44,18 @@ public class LogInActivity extends AppCompatActivity {
             // api 생성
             AuthApi authApi = ApiProvider.getAuthApi();
 
-            authApi.login(loginRequest).enqueue(new Callback<LoginRequest>() {
+            authApi.login(loginRequest).enqueue(new Callback<LoginResponse>() {
                 @Override
-                public void onResponse(Call<LoginRequest> call, Response<LoginRequest> response) {
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     // 로그인 성공 시 메인화면으로 이동
                     startActivity(mainIntent);
+                    String accessToken = response.body().getAccess_token();
+
+                    SharedPreferenceManager.getInstance(LogInActivity.this).edit().putString("accessToken", accessToken);
                 }
 
                 @Override
-                public void onFailure(Call<LoginRequest> call, Throwable t) {
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
                     Toast.makeText(LogInActivity.this, "로그인에 실패하였습니다", Toast.LENGTH_SHORT).show();
                 }
             });

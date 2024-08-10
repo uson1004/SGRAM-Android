@@ -9,8 +9,6 @@ import androidx.databinding.DataBindingUtil;
 import com.example.sgram.R;
 import com.example.sgram.data.api.ApiProvider;
 import com.example.sgram.data.api.ChatApi;
-import com.example.sgram.data.response.LiveChattingResponse;
-import com.example.sgram.data.response.TokenResponse;
 import com.example.sgram.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,10 +23,18 @@ public class MainActivity extends AppCompatActivity {
         ChatApi chatApi = ApiProvider.getChatApi();
 
         binding.chattingText.setOnClickListener(v -> {
-                LiveChattingResponse liveChattingResponse = new LiveChattingResponse("", "", "");
-                TokenResponse tokenResponse = new TokenResponse("");
+            final String data = "Bearer b2iidkkdiskejfjv.dsjseilsjdlfe.tokaaweolfskeioswldkeosl";
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            });
         });
 
+    }
+
+    public void sendChat(String data, String contents) {
 
     }
 }
