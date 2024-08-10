@@ -23,18 +23,9 @@ public class MainActivity extends AppCompatActivity {
         ChatApi chatApi = ApiProvider.getChatApi();
 
         binding.chattingText.setOnClickListener(v -> {
-            final String data = "Bearer b2iidkkdiskejfjv.dsjseilsjdlfe.tokaaweolfskeioswldkeosl";
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
 
-                }
-            });
         });
-
     }
 
-    public void sendChat(String data, String contents) {
 
-    }
 }

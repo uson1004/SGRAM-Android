@@ -1,6 +1,7 @@
 package com.example.sgram.presentation;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -69,17 +70,22 @@ public class JoinActivity extends AppCompatActivity {
 
                     switch (code) {
                         case 201 : {
-                            //Toast.makeText("");
+                            Toast.makeText(JoinActivity.this, "로그인 성공",Toast.LENGTH_SHORT).show();
                             startActivity(loginIntent);
                             break;
                         }
 
                         case 400: {
+                            Toast.makeText(JoinActivity.this, "Bad Request", Toast.LENGTH_LONG).show();
                             break;
                         }
 
                         case 409: {
+                            Toast.makeText(JoinActivity.this, "이미 가입된 정보 입니다.", Toast.LENGTH_LONG).show();
+                        }
 
+                        case 500: {
+                            Toast.makeText(JoinActivity.this, "서버 오류", Toast.LENGTH_LONG).show();
                         }
                     }
                 }

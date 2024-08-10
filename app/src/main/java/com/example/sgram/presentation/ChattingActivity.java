@@ -23,10 +23,22 @@ public class ChattingActivity extends AppCompatActivity {
 
         ChatApi chatApi = ApiProvider.getChatApi();
 
+        // 버튼 클릭 소켓 연결
         binding.submitBt.setOnClickListener(v -> {
             String text = binding.chatInsert.getText().toString();
 
+            final String data = "Bearer b2iidkkdiskejfjv.dsjseilsjdlfe.tokaaweolfskeioswldkeosl";
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            });
 
         });
+    }
+
+    public void sendChat(String data, String contents) {
+
     }
 }

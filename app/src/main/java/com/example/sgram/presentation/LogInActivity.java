@@ -15,6 +15,7 @@ import com.example.sgram.R;
 import com.example.sgram.data.api.ApiProvider;
 import com.example.sgram.data.api.AuthApi;
 import com.example.sgram.data.local.SharedPreferenceManager;
+import com.example.sgram.data.local.TokenInterceptor;
 import com.example.sgram.data.request.JoinRequest;
 import com.example.sgram.data.request.LoginRequest;
 import com.example.sgram.data.response.user.LoginResponse;
@@ -50,8 +51,41 @@ public class LogInActivity extends AppCompatActivity {
                     // 로그인 성공 시 메인화면으로 이동
                     startActivity(mainIntent);
                     String accessToken = response.body().getAccess_token();
-
                     SharedPreferenceManager.getInstance(LogInActivity.this).edit().putString("accessToken", accessToken);
+
+                    switch (response.code()) {
+                        case 200: {
+                            Toast.makeText(LogInActivity.this, "", Toast.LENGTH_SHORT).show();
+                        }
+
+                        case 201: {
+
+                        }
+
+                        case 204: {
+
+                        }
+
+                        case 400: {
+                            Toast.makeText(LogInActivity.this,  "Bad Request", Toast.LENGTH_LONG).show();
+                        }
+
+                        case 401: {
+                            Toast.makeText(LogInActivity.this, "Unauthorized", Toast.LENGTH_LONG).show();
+                        }
+
+                        case 403: {
+                            Toast.makeText(LogInActivity.this, "접근 권한 불가", Toast.LENGTH_SHORT).show();
+                        }
+
+                        case 404: {
+                            Toast.makeText(LogInActivity.this, "찾을 수 없음", Toast.LENGTH_SHORT).show();
+                        }
+
+                        case 409: {
+                            Toast.makeText(LogInActivity.this, "이미 존재하는 계정입니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }
 
                 @Override
