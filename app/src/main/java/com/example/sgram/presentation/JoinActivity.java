@@ -1,6 +1,7 @@
 package com.example.sgram.presentation;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,6 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import com.example.sgram.R;
 import com.example.sgram.data.api.ApiProvider;
 import com.example.sgram.data.api.AuthApi;
+import com.example.sgram.data.local.SharedPreferenceManager;
 import com.example.sgram.data.request.JoinRequest;
 import com.example.sgram.databinding.ActivityJoinBinding;
 
@@ -41,6 +43,7 @@ public class JoinActivity extends AppCompatActivity {
             String phone = binding.phoneTx.getText().toString();
 
             JoinRequest joinRequest = new JoinRequest(id, pw, phone);
+
             AuthApi authApi = ApiProvider.getAuthApi();
 
             binding.pwdTx.addTextChangedListener(new TextWatcher() {

@@ -11,4 +11,6 @@ public interface ChatApi {
     // 토큰과 함께 response 받기
     @GET("/live-chatting")
     Call<LiveChattingResponse> getAccessToken(@Header("") LiveChattingResponse liveChattingResponse);
+
+
 }

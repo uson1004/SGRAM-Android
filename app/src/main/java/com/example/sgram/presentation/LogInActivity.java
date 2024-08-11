@@ -49,10 +49,6 @@ public class LogInActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     // 로그인 성공 시 메인화면으로 이동
-                    startActivity(mainIntent);
-                    String accessToken = response.body().getAccess_token();
-                    SharedPreferenceManager.getInstance(LogInActivity.this).edit().putString("accessToken", accessToken);
-
                     switch (response.code()) {
                         case 200: {
                             Toast.makeText(LogInActivity.this, "", Toast.LENGTH_SHORT).show();

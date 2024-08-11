@@ -1,7 +1,9 @@
 package com.example.sgram.data.api;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
+import com.example.sgram.data.local.ResponseInterceptor;
 import com.example.sgram.data.local.TokenInterceptor;
 
 import okhttp3.OkHttpClient;
@@ -22,16 +24,18 @@ public class ApiProvider {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .client(getOkHttpClient(context))
+                    .client(getOkHttpClient(context)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
 
-    public static OkHttpClient getOkHttpClient(Context context) {
+    public static OkHttpClient getOkHttpClient(SharedPreferences context) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new TokenInterceptor(context)).build();
+                .addInterceptor(new TokenInterceptor(context))
+                .addInterceptor(new ResponseInterceptor())
+                .build();
 
         return okHttpClient;
     }
@@ -43,6 +47,8 @@ public class ApiProvider {
     public static ChatApi getChatApi() {
         return getRetrofit().create(ChatApi.class);
     }
+
+
 }
 
 

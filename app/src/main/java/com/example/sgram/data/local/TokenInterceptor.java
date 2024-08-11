@@ -3,9 +3,12 @@ package com.example.sgram.data.local;
 
 import android.content.SharedPreferences;
 
+import androidx.annotation.NonNull;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
+import okhttp3.Request;
 import okhttp3.Response;
 
 public class TokenInterceptor implements Interceptor {
@@ -16,11 +19,15 @@ public class TokenInterceptor implements Interceptor {
         this.sharedPreferences = sharedPreferences;
     }
 
+    @NonNull
     @Override
     public Response intercept(Interceptor.Chain chain) throws IOException {
-
         String accessToken = sharedPreferences.getString("accessToken", "대체");
+        Request request = chain.request()
+                .newBuilder()
+                .addHeader("", accessToken)
+                .build();
 
-        return null;
+        return chain.proceed(request);
     }
 }
