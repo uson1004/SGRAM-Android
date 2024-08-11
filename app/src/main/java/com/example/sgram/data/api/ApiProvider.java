@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.example.sgram.data.local.ResponseInterceptor;
 import com.example.sgram.data.local.TokenInterceptor;
+import com.google.gson.Gson;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -17,23 +18,25 @@ public class ApiProvider {
     private static Context context;
 
     public ApiProvider(Context context) {
-        this.context = context;
+        ApiProvider.context = context;
     }
 
     public static Retrofit getRetrofit() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .client(getOkHttpClient(context)
+                    .client(getOkHttpClient(context))
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
 
-    public static OkHttpClient getOkHttpClient(SharedPreferences context) {
+    public static OkHttpClient getOkHttpClient(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new TokenInterceptor(context))
+                .addInterceptor(new TokenInterceptor(sharedPreferences))
                 .addInterceptor(new ResponseInterceptor())
                 .build();
 
@@ -47,8 +50,6 @@ public class ApiProvider {
     public static ChatApi getChatApi() {
         return getRetrofit().create(ChatApi.class);
     }
-
-
 }
 
 

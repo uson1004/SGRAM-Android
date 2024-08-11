@@ -1,10 +1,9 @@
 package com.example.sgram.presentation;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.session.MediaSession;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,10 +22,13 @@ import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChattingActivity extends AppCompatActivity {
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
+
+    private Retrofit retrofit;
+    private String BASE_URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,29 +39,29 @@ public class ChattingActivity extends AppCompatActivity {
         ActivityChattingBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_chatting);
 
 
-
         // 버튼 클릭 소켓 연결
         binding.submitBt.setOnClickListener(v -> {
             String text = binding.chatInsert.getText().toString();
-
-
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    //sendChat(text);
-
-                }
-            });
+            new Thread(() -> sendChat(text)).start();
         });
     }
 
 
-    public void sendChat(SharedPreferences data) {
+    public void sendChat(String data) {
+        SharedPreferences sharedPreferences = SharedPreferenceManager.getInstance(ChattingActivity.this);
 
-        Context sharedContext = (Context) SharedPreferenceManager.getInstance(ChattingActivity.this).edit().putString("accessToken", "");
-        OkHttpClient getToken = ApiProvider.getOkHttpClient((SharedPreferences) sharedContext);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new TokenInterceptor(sharedPreferences))
+                .addInterceptor(new ResponseInterceptor())
+                .build();
 
-        ChatApi chatApi = ApiProvider.getChatApi();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ChatApi chatApi = retrofit.create(ChatApi.class);
         LiveChattingResponse liveChattingResponse = new LiveChattingResponse("", "", "");
         chatApi.getAccessToken(liveChattingResponse).enqueue(new Callback<LiveChattingResponse>() {
             @Override
@@ -68,8 +70,9 @@ public class ChattingActivity extends AppCompatActivity {
                     case 201: {
 
                     }
+
                     case 400: {
-                        Toast.makeText(sharedContext, "", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(sharedContext, "", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
