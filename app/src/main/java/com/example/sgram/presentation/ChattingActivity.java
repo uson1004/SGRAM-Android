@@ -74,7 +74,7 @@ public class ChattingActivity extends AppCompatActivity {
             @Override
             public void onMessage(WebSocket webSocket, String text) {
                 runOnUiThread(() -> {
-
+                    
                 });
             }
         });
