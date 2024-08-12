@@ -16,29 +16,37 @@
             android:layout_height="wrap_content"
             android:text="로그인"
             android:textSize="20sp"
+            android:layout_marginStart="24dp"
             app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintTop_toTopOf="@id/glTop" />
+            app:layout_constraintTop_toTopOf="@id/glTop"
+            />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/glStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="24dp" />
+            app:layout_constraintGuide_begin="24dp"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/glTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="24dp" />
+            app:layout_constraintGuide_begin="24dp"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/glEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="24dp" />
+            app:layout_constraintGuide_end="24dp"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            />
 
         <EditText
             android:id="@+id/idTx"
@@ -48,6 +56,7 @@
             android:inputType="text"
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@id/signInText"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
             />
 
         <EditText
@@ -58,6 +67,7 @@
             android:inputType="textPassword"
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@id/idTx"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
             />
 
         <TextView
@@ -67,7 +77,8 @@
             android:text="로그인이 안되시나요?"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintBottom_toTopOf="@id/signInButton"
+            app:layout_constraintBottom_toTopOf="@id/logInButton"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
             />
 
         <TextView
@@ -76,9 +87,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="회원가입하러가기"
+            android:layout_marginEnd="24dp"
             android:textColor="#0000FF"
             app:layout_constraintStart_toEndOf="@id/alID"
             app:layout_constraintBottom_toTopOf="@id/logInButton"
+
             />
 
         <Button
@@ -88,6 +101,8 @@
             android:text="로그인하기"
             android:layout_marginTop="200dp"
             app:layout_constraintStart_toStartOf="@id/pwdTx"
-            app:layout_constraintTop_toBottomOf="@id/pwdTx" />
+            app:layout_constraintTop_toBottomOf="@id/pwdTx"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -13,5 +13,4 @@ public class ResponseInterceptor implements Interceptor {
         Response response = chain.proceed(request);
 
         return response;
-    }
-}
+    }}

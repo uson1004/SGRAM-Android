@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiProvider {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "";
+    private static final String BASE_URL = "http://localhost:8080/example/";
 
     private static Context context;
 
@@ -33,7 +33,8 @@ public class ApiProvider {
     }
 
     public static OkHttpClient getOkHttpClient(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("sgram", Context.MODE_PRIVATE);
+        int t = sharedPreferences.getInt("sgram",0);
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new TokenInterceptor(sharedPreferences))

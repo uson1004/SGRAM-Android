@@ -57,7 +57,6 @@ public class JoinActivity extends AppCompatActivity {
                     String password = "[a-z|]";
                     if (Pattern.matches(password, s)) {
                     }
-
                 }
 
                 @Override

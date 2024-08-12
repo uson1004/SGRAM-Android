@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ChattingActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
-    private String BASE_URL = "";
+    private String BASE_URL = "http://localhost:8080/example/";
     private WebSocket webSocket;
 
     @Override
