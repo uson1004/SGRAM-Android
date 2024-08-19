@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,6 +23,7 @@ import com.example.sgram.data.response.user.LoginResponse;
 import com.example.sgram.databinding.ActivityJoinBinding;
 import com.example.sgram.databinding.ActivityLogInBinding;
 
+import kotlin.reflect.KType;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,7 +37,15 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
         ActivityLogInBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_log_in);
-        Intent mainIntent = new Intent(this, JoinActivity.class);
+        Intent joinIntent = new Intent(this, JoinActivity.class);
+        Intent mainIntent = new Intent(this, MainActivity.class);
+
+        binding.joinText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(joinIntent);
+            }
+        });
 
         binding.logInButton.setOnClickListener(v -> {
             String id = binding.idTx.getText().toString();
@@ -43,7 +53,7 @@ public class LogInActivity extends AppCompatActivity {
 
             LoginRequest loginRequest = new LoginRequest(id, pw);
             // api 생성
-            AuthApi authApi = ApiProvider.getAuthApi();
+            AuthApi authApi = new ApiProvider(LogInActivity.this).getAuthApi();
 
             authApi.login(loginRequest).enqueue(new Callback<LoginResponse>() {
                 @Override
@@ -52,6 +62,17 @@ public class LogInActivity extends AppCompatActivity {
                     switch (response.code()) {
                         case 200: {
                             Toast.makeText(LogInActivity.this, "", Toast.LENGTH_SHORT).show();
+                            startActivity(mainIntent);
+                            // 응답 값 사용하기
+                            if (response.body() != null) {
+                                String accessToken = response.body().getAccess_token();
+                                String refreshToken = response.body().getRefresh_token();
+                                //LoginResponse login = new LoginResponse(accessToken, refreshToken);
+
+                                binding.idTx.setText(response.body().getAccess_token(), TextView.BufferType.EDITABLE);
+                                binding.pwdTx.setText("테스트");
+
+                            }
                         }
 
                         case 201: {

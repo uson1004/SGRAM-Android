@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        ChatApi chatApi = ApiProvider.getChatApi();
+        ChatApi chatApi = new ApiProvider(MainActivity.this).getChatApi();
 
         binding.chattingText.setOnClickListener(v -> {
 

@@ -1,11 +1,11 @@
 package com.example.sgram.presentation;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -16,7 +16,6 @@ import androidx.databinding.DataBindingUtil;
 import com.example.sgram.R;
 import com.example.sgram.data.api.ApiProvider;
 import com.example.sgram.data.api.AuthApi;
-import com.example.sgram.data.local.SharedPreferenceManager;
 import com.example.sgram.data.request.JoinRequest;
 import com.example.sgram.databinding.ActivityJoinBinding;
 
@@ -37,6 +36,34 @@ public class JoinActivity extends AppCompatActivity {
         ActivityJoinBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_join);
         Intent loginIntent = new Intent(this, LogInActivity.class);
 
+        binding.logInText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(loginIntent);
+            }
+        });
+
+        // 정규식 ( 최대 글자 제한 )
+        binding.pwdTx.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String password = "[a-z|]";
+                if (Pattern.matches(password, s)) {
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         binding.signInButton.setOnClickListener(v -> {
             String id = binding.idTx.getText().toString();
             String pw = binding.pwdTx.getText().toString();
@@ -44,26 +71,7 @@ public class JoinActivity extends AppCompatActivity {
 
             JoinRequest joinRequest = new JoinRequest(id, pw, phone);
 
-            AuthApi authApi = ApiProvider.getAuthApi();
-
-            binding.pwdTx.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    String password = "[a-z|]";
-                    if (Pattern.matches(password, s)) {
-                    }
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
+            AuthApi authApi = new ApiProvider(JoinActivity.this).getAuthApi();
 
             authApi.Join(joinRequest).enqueue(new Callback<Void>() {
                 @Override
@@ -72,8 +80,9 @@ public class JoinActivity extends AppCompatActivity {
 
                     switch (code) {
                         case 201 : {
-                            Toast.makeText(JoinActivity.this, "로그인 성공",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(JoinActivity.this, "회원가입을 성공했습니다!",Toast.LENGTH_SHORT).show();
                             startActivity(loginIntent);
+                            Log.d("JoinActivity", response.body().toString());
                             break;
                         }
 
