@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ChattingActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
-    private String BASE_URL = "http://localhost:8080/example/";
+    private String BASE_URL = "http://172.20.10.3:8080";
     private WebSocket webSocket;
 
     private RecyclerAdapter recyclerAdapter;
@@ -49,9 +49,7 @@ public class ChattingActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         binding.submitBt.setOnClickListener(v -> {
-            list.add(new RecyclerData(binding.chatInsert.getText().toString()));
-            recyclerAdapter.notifyDataSetChanged();
-            binding.chatInsert.setText("");
+
         });
 
 
@@ -60,8 +58,14 @@ public class ChattingActivity extends AppCompatActivity {
             String text = binding.chatInsert.getText().toString();
             new Thread(() -> runOnUiThread(() ->
                     sendChat(text)
+
             )
             ).start();
+
+            list.add(new RecyclerData(binding.chatInsert.getText().toString()));
+            recyclerAdapter.notifyDataSetChanged();
+            binding.chatInsert.setText("");
+
         });
     }
 

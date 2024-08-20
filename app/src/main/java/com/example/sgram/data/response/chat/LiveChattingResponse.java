@@ -12,17 +12,10 @@ public class LiveChattingResponse {
     @SerializedName("contents")
     private String contents;
 
-    @SerializedName("AccessToken")
-    private String accessToken;
-
     public LiveChattingResponse(String message, String account_id, String contents) {
         this.message = message;
         this.account_id = account_id;
         this.contents = contents;
-    }
-
-    public String getContents() {
-        return contents;
     }
 
     public void setContents(String contents) {

@@ -58,10 +58,11 @@ public class LogInActivity extends AppCompatActivity {
             authApi.login(loginRequest).enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    //Toast.makeText(LogInActivity.this, response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                     // 로그인 성공 시 메인화면으로 이동
                     switch (response.code()) {
                         case 200: {
-                            Toast.makeText(LogInActivity.this, "", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LogInActivity.this, "성공므야ㅜ", Toast.LENGTH_SHORT).show();
                             startActivity(mainIntent);
                             // 응답 값 사용하기
                             if (response.body() != null) {
@@ -72,35 +73,41 @@ public class LogInActivity extends AppCompatActivity {
                                 binding.idTx.setText(response.body().getAccess_token(), TextView.BufferType.EDITABLE);
                                 binding.pwdTx.setText("테스트");
 
+                                Log.d("TEST", response.body().getAccess_token());
                             }
                         }
 
                         case 201: {
-
+                            break;
                         }
 
                         case 204: {
-
+                            break;
                         }
 
                         case 400: {
                             Toast.makeText(LogInActivity.this,  "Bad Request", Toast.LENGTH_LONG).show();
+                            break;
                         }
 
                         case 401: {
                             Toast.makeText(LogInActivity.this, "Unauthorized", Toast.LENGTH_LONG).show();
+                            break;
                         }
 
                         case 403: {
                             Toast.makeText(LogInActivity.this, "접근 권한 불가", Toast.LENGTH_SHORT).show();
+                            break;
                         }
 
                         case 404: {
                             Toast.makeText(LogInActivity.this, "찾을 수 없음", Toast.LENGTH_SHORT).show();
+                            break;
                         }
 
                         case 409: {
                             Toast.makeText(LogInActivity.this, "이미 존재하는 계정입니다.", Toast.LENGTH_SHORT).show();
+                            break;
                         }
                     }
                 }

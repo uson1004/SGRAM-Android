@@ -25,7 +25,7 @@ public class TokenInterceptor implements Interceptor {
         String accessToken = sharedPreferences.getString("accessToken", "대체");
         Request request = chain.request()
                 .newBuilder()
-                .addHeader("", accessToken)
+                //.addHeader("Authorization", "Bearer " + accessToken)
                 .build();
 
         return chain.proceed(request);

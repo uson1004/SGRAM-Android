@@ -1,5 +1,6 @@
 package com.example.sgram.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -20,10 +21,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        Intent chatIntent = new Intent(this, ChattingActivity.class);
         ChatApi chatApi = new ApiProvider(MainActivity.this).getChatApi();
 
         binding.chattingText.setOnClickListener(v -> {
-
+            startActivity(chatIntent);
         });
     }
 

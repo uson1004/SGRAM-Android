@@ -9,12 +9,12 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface AuthApi {
-    @POST("/join")
+    @POST("/users/join")
     Call<Void> Join(
             @Body JoinRequest signInRequest
     );
 
-    @POST("/login")
+    @POST("/users/login")
     Call<LoginResponse> login(
         @Body LoginRequest loginRequest
     );

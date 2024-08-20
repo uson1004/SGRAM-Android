@@ -36,12 +36,10 @@ public class JoinActivity extends AppCompatActivity {
         ActivityJoinBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_join);
         Intent loginIntent = new Intent(this, LogInActivity.class);
 
-        binding.logInText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.logInText.setOnClickListener(v -> {
                 startActivity(loginIntent);
             }
-        });
+        );
 
         // 정규식 ( 최대 글자 제한 )
         binding.pwdTx.addTextChangedListener(new TextWatcher() {
@@ -77,12 +75,12 @@ public class JoinActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     int code = response.code();
-
+                    //Log.d("TEST", response.errorBody().toString());
                     switch (code) {
-                        case 201 : {
+                        case 200 : {
                             Toast.makeText(JoinActivity.this, "회원가입을 성공했습니다!",Toast.LENGTH_SHORT).show();
                             startActivity(loginIntent);
-                            Log.d("JoinActivity", response.body().toString());
+                           //    Log.d("TEST", response.body().toString());
                             break;
                         }
 
@@ -93,17 +91,20 @@ public class JoinActivity extends AppCompatActivity {
 
                         case 409: {
                             Toast.makeText(JoinActivity.this, "이미 가입된 정보 입니다.", Toast.LENGTH_LONG).show();
+                            break;
                         }
 
                         case 500: {
                             Toast.makeText(JoinActivity.this, "서버 오류", Toast.LENGTH_LONG).show();
+                            break;
                         }
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                    Toast.makeText(JoinActivity.this, "정보를 다시 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JoinActivity.this,  "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    Log.d("TEST", t.getMessage().toString());
                 }
             });
         });
