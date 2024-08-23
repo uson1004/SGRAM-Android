@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,7 +66,6 @@ public class LogInActivity extends AppCompatActivity {
                             if (response.body() != null) {
                                 String accessToken = response.body().getAccess_token();
                                 String refreshToken = response.body().getRefresh_token();
-                                //LoginResponse login = new LoginResponse(accessToken, refreshToken);
 
                                 SharedPreferences sharedPreferences = getSharedPreferences("sgram", Context.MODE_PRIVATE);
 
@@ -78,8 +76,6 @@ public class LogInActivity extends AppCompatActivity {
 
                                 binding.idTx.setText(response.body().getAccess_token(), TextView.BufferType.EDITABLE);
                                 binding.pwdTx.setText("테스트");
-
-                                Log.d("TEST", response.body().getAccess_token());
                             }
                         }
 

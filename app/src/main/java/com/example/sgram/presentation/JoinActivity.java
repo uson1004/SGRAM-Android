@@ -74,12 +74,10 @@ public class JoinActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     int code = response.code();
-                    //Log.d("TEST", response.errorBody().toString());
                     switch (code) {
                         case 200 : {
                             Toast.makeText(JoinActivity.this, "회원가입을 성공했습니다!",Toast.LENGTH_SHORT).show();
                             startActivity(loginIntent);
-                           //    Log.d("TEST", response.body().toString());
                             break;
                         }
 

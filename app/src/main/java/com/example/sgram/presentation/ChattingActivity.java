@@ -92,12 +92,6 @@ public class ChattingActivity extends AppCompatActivity {
                 .addInterceptor(new ResponseInterceptor())
                 .build();
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
         Request request = new Request.Builder()
                 .url(BASE_URL)
                 .build();
