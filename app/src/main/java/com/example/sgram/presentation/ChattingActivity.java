@@ -22,6 +22,7 @@ import java.util.List;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
@@ -110,7 +111,7 @@ public class ChattingActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         socket.disconnect();
-        //Emitter eventName = socket.off("EVENT_NAME", );
+        Emitter eventName = socket.off("EVENT_NAME");
 
     }
 }
