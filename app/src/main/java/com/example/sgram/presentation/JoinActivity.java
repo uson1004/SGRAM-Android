@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.sgram.R;
-import com.example.sgram.data.api.ApiProvider;
-import com.example.sgram.data.api.AuthApi;
+import com.example.sgram.data.remote.api.ApiProvider;
+import com.example.sgram.data.remote.api.AuthApi;
 import com.example.sgram.data.request.SignUpRequest;
 import com.example.sgram.databinding.ActivityJoinBinding;
 

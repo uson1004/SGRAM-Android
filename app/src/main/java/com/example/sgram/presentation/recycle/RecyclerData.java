@@ -1,4 +1,4 @@
-package com.example.sgram.data.recycle;
+package com.example.sgram.presentation.recycle;
 
 public class RecyclerData {
     private String profileText;

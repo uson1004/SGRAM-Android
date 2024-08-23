@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.sgram.R;
 import com.example.sgram.data.local.ResponseInterceptor;
-import com.example.sgram.data.local.SharedPreferenceManager;
-import com.example.sgram.data.local.TokenInterceptor;
-import com.example.sgram.data.recycle.RecyclerAdapter;
-import com.example.sgram.data.recycle.RecyclerData;
+import com.example.sgram.data.remote.interceptor.SharedPreferenceManager;
+import com.example.sgram.data.remote.interceptor.TokenInterceptor;
+import com.example.sgram.presentation.recycle.RecyclerAdapter;
+import com.example.sgram.presentation.recycle.RecyclerData;
 import com.example.sgram.databinding.ActivityChattingBinding;
 
 import java.net.URISyntaxException;
@@ -28,7 +28,6 @@ import okhttp3.Request;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChattingActivity extends AppCompatActivity {
 

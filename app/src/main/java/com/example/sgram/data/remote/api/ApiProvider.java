@@ -1,11 +1,10 @@
-package com.example.sgram.data.api;
+package com.example.sgram.data.remote.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.sgram.data.local.ResponseInterceptor;
-import com.example.sgram.data.local.TokenInterceptor;
+import com.example.sgram.data.remote.interceptor.TokenInterceptor;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -41,7 +40,6 @@ public class ApiProvider {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new TokenInterceptor(sharedPreferences))
-                .addInterceptor(new ResponseInterceptor())
                 .build();
         return okHttpClient;
     }

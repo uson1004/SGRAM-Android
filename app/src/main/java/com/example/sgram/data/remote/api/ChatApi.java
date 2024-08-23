@@ -1,4 +1,4 @@
-package com.example.sgram.data.api;
+package com.example.sgram.data.remote.api;
 
 import com.example.sgram.data.response.chat.LiveChattingResponse;
 import com.example.sgram.data.response.chat.SendChatResponse;

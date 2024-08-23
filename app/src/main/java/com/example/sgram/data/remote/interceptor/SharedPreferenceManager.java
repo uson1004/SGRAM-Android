@@ -1,4 +1,4 @@
-package com.example.sgram.data.local;
+package com.example.sgram.data.remote.interceptor;
 
 import android.content.Context;
 import android.content.SharedPreferences;

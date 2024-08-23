@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.sgram.R;
-import com.example.sgram.data.api.ApiProvider;
-import com.example.sgram.data.api.ChatApi;
+import com.example.sgram.data.remote.api.ApiProvider;
+import com.example.sgram.data.remote.api.ChatApi;
 import com.example.sgram.databinding.ActivityMainBinding;
 
 
