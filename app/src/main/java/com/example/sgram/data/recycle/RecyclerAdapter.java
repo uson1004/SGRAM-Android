@@ -14,35 +14,43 @@ import com.example.sgram.R;
 import com.example.sgram.databinding.RecyclerItemBinding;
 import com.example.sgram.presentation.MainActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.CustomViewHolder> {
 
+    private List<RecyclerData> dataList;
 
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        return new CustomViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-
+        RecyclerData data = dataList.get(position);
+        holder.title.setText(data.getTitle());
+        holder.profileText.setText(data.getProfileText());
+        holder.subText.setText(data.getSubText());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return dataList.size();
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
+        private TextView title;
+        private TextView profileText;
+        private TextView subText;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            String profile = itemView.findViewById(R.id.mainText).toString();
-            String title = itemView.findViewById(R.id.titleText).toString();
-            String message = itemView.findViewById(R.id.subText).toString();
-
+            profileText = itemView.findViewById(R.id.mainText);
+            title = itemView.findViewById(R.id.titleText);
+            subText = itemView.findViewById(R.id.subText);
         }
 
         @Override

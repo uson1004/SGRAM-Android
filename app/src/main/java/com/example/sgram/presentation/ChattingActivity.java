@@ -75,7 +75,7 @@ public class ChattingActivity extends AppCompatActivity {
                     );
             });
 
-            list.add(new RecyclerData(binding.chatInsert.getText().toString()));
+            //list.add(new RecyclerData();
             recyclerAdapter.notifyDataSetChanged();
             binding.chatInsert.setText("");
 
