@@ -12,8 +12,10 @@ public interface ChatApi {
 
     // 토큰과 함께 response 받기
     @GET("/chat/live-chatting")
-    Call<LiveChattingResponse> getLiveChatting(@Header("Authorization") LiveChattingResponse liveChattingResponse);
+    Call<LiveChattingResponse> getLiveChatting(
+            @Header("Authorization") String accessToken
+    );
 
     @POST("/chat/chatting")
-    Call<SendChatResponse> sendChat(@Header("Authorization") SendChatResponse sendChatResponse);
+    Call<SendChatResponse> sendChat(@Header("Authorization") String content);
 }

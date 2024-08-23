@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -16,7 +15,7 @@ import androidx.databinding.DataBindingUtil;
 import com.example.sgram.R;
 import com.example.sgram.data.api.ApiProvider;
 import com.example.sgram.data.api.AuthApi;
-import com.example.sgram.data.request.JoinRequest;
+import com.example.sgram.data.request.SignUpRequest;
 import com.example.sgram.databinding.ActivityJoinBinding;
 
 import java.util.regex.Pattern;
@@ -67,11 +66,11 @@ public class JoinActivity extends AppCompatActivity {
             String pw = binding.pwdTx.getText().toString();
             String phone = binding.phoneTx.getText().toString();
 
-            JoinRequest joinRequest = new JoinRequest(id, pw, phone);
+            SignUpRequest signUpRequest = new SignUpRequest(id, pw, phone);
 
             AuthApi authApi = new ApiProvider(JoinActivity.this).getAuthApi();
 
-            authApi.Join(joinRequest).enqueue(new Callback<Void>() {
+            authApi.Join(signUpRequest).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     int code = response.code();

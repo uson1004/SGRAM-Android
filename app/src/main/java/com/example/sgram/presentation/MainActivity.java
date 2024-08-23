@@ -1,6 +1,7 @@
 package com.example.sgram.presentation;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -11,6 +12,7 @@ import com.example.sgram.R;
 import com.example.sgram.data.api.ApiProvider;
 import com.example.sgram.data.api.ChatApi;
 import com.example.sgram.databinding.ActivityMainBinding;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +26,12 @@ public class MainActivity extends AppCompatActivity {
         Intent chatIntent = new Intent(this, ChattingActivity.class);
         ChatApi chatApi = new ApiProvider(MainActivity.this).getChatApi();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("sgram", MODE_PRIVATE);
+        sharedPreferences.getString("accessToken", "0");
+
         binding.chattingText.setOnClickListener(v -> {
+            chatApi.getLiveChatting(sharedPreferences.toString());
+
             startActivity(chatIntent);
         });
     }

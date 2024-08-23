@@ -17,8 +17,11 @@ import com.example.sgram.data.recycle.RecyclerAdapter;
 import com.example.sgram.data.recycle.RecyclerData;
 import com.example.sgram.databinding.ActivityChattingBinding;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
+import io.socket.client.IO;
+import io.socket.client.Socket;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
@@ -37,6 +40,8 @@ public class ChattingActivity extends AppCompatActivity {
 
     private List<RecyclerData> list;
 
+    private Socket socket;
+
     @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,21 +57,30 @@ public class ChattingActivity extends AppCompatActivity {
 
         });
 
+        try {
+            socket = IO.socket("http/");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         // 버튼 클릭 소켓 연결
         binding.submitBt.setOnClickListener(v -> {
             String text = binding.chatInsert.getText().toString();
-            new Thread(() -> runOnUiThread(() ->
-                    sendChat(text)
+            new Thread(() -> {
+                    runOnUiThread(() -> {
+                            socket.emit("", text);
 
-            )
-            ).start();
+                        }
+                    );
+            });
 
             list.add(new RecyclerData(binding.chatInsert.getText().toString()));
             recyclerAdapter.notifyDataSetChanged();
             binding.chatInsert.setText("");
 
         });
+
+
     }
 
 
@@ -96,5 +110,13 @@ public class ChattingActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        socket.disconnect();
+        //Emitter eventName = socket.off("EVENT_NAME", );
+
     }
 }

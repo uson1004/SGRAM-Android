@@ -2,7 +2,7 @@ package com.example.sgram.data.request;
 
 import com.google.gson.annotations.SerializedName;
 
-public class JoinRequest {
+public class SignUpRequest {
     @SerializedName("account_id")
     private String account_id;
 
@@ -12,7 +12,7 @@ public class JoinRequest {
     @SerializedName("phone")
     private String phone_number;
 
-    public JoinRequest(String account_id, String password, String phone) {
+    public SignUpRequest(String account_id, String password, String phone) {
         this.account_id = account_id;
         this.password = password;
         this.phone_number = phone;

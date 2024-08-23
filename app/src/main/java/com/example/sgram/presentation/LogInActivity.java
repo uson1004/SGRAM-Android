@@ -1,8 +1,9 @@
     package com.example.sgram.presentation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -15,15 +16,10 @@ import androidx.databinding.DataBindingUtil;
 import com.example.sgram.R;
 import com.example.sgram.data.api.ApiProvider;
 import com.example.sgram.data.api.AuthApi;
-import com.example.sgram.data.local.SharedPreferenceManager;
-import com.example.sgram.data.local.TokenInterceptor;
-import com.example.sgram.data.request.JoinRequest;
 import com.example.sgram.data.request.LoginRequest;
 import com.example.sgram.data.response.user.LoginResponse;
-import com.example.sgram.databinding.ActivityJoinBinding;
 import com.example.sgram.databinding.ActivityLogInBinding;
 
-import kotlin.reflect.KType;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,6 +56,9 @@ public class LogInActivity extends AppCompatActivity {
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     //Toast.makeText(LogInActivity.this, response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                     // 로그인 성공 시 메인화면으로 이동
+                    if (response.isSuccessful()) {
+
+                    }
                     switch (response.code()) {
                         case 200: {
                             Toast.makeText(LogInActivity.this, "성공므야ㅜ", Toast.LENGTH_SHORT).show();
@@ -69,6 +68,13 @@ public class LogInActivity extends AppCompatActivity {
                                 String accessToken = response.body().getAccess_token();
                                 String refreshToken = response.body().getRefresh_token();
                                 //LoginResponse login = new LoginResponse(accessToken, refreshToken);
+
+                                SharedPreferences sharedPreferences = getSharedPreferences("sgram", Context.MODE_PRIVATE);
+
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("accessToken", accessToken);
+                                editor.putString("refreshToken", refreshToken);
+                                editor.apply();
 
                                 binding.idTx.setText(response.body().getAccess_token(), TextView.BufferType.EDITABLE);
                                 binding.pwdTx.setText("테스트");

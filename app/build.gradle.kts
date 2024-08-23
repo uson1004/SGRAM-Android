@@ -54,4 +54,6 @@ dependencies {
 
     // Testing Navigation
     androidTestImplementation (libs.navigation.testing)
+
+    implementation(libs.socket.io.client)
 }
