@@ -41,6 +41,7 @@ public class ChattingActivity extends AppCompatActivity {
     private Socket socket;
 
     private Gson gson = new Gson();
+    private String socketText;
 
     private RecyclerAdapter recyclerAdapter;
     private RecyclerView recyclerView;
@@ -59,9 +60,9 @@ public class ChattingActivity extends AppCompatActivity {
 
         // 버튼 클릭 소켓 연결
         binding.submitBt.setOnClickListener(v -> {
-            String text = binding.chatInsert.getText().toString();
-            sendChat(text);
-
+            socketText = binding.chatInsert.getText().toString();
+            sendChat(socketText);
+            Log.d("TEST", "채팅" + socketText);
             getUserInfo();
         });
     }
@@ -108,7 +109,7 @@ public class ChattingActivity extends AppCompatActivity {
             public void onOpen(WebSocket webSocket, Response response) {
                 super.onOpen(webSocket, response);
                 runOnUiThread(() -> {
-                        webSocket.send(data);
+                        //webSocket.send(data);
                         Toast.makeText(ChattingActivity.this, "연결에 성공하였습니다!", Toast.LENGTH_SHORT).show();
                     }
                 );
@@ -117,7 +118,8 @@ public class ChattingActivity extends AppCompatActivity {
             @Override
             public void onMessage(WebSocket webSocket, String text) {
                 runOnUiThread(() -> {
-                    webSocket.send("{\"message\":"+data);
+                    //webSocket.send("{\"message\":"+data);
+                    Log.d("TEST", text);
                 });
             }
         });
@@ -144,13 +146,14 @@ public class ChattingActivity extends AppCompatActivity {
                 super.onOpen(webSocket, response);
                 // websocket 연결 성공 시
                 JSONObject jsonObject = new JSONObject();
-                String socketText = binding.chatInsert.getText().toString();
 
                 try {
                     jsonObject.put("message", socketText);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
+                webSocket.send(socketText);
+                Log.d("TEST", socketText);
             }
 
             @Override
