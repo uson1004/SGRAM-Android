@@ -12,9 +12,10 @@ import com.example.sgram.R;
 import com.example.sgram.data.remote.api.ApiProvider;
 import com.example.sgram.data.remote.api.ChatApi;
 import com.example.sgram.databinding.ActivityMainBinding;
-
+import okhttp3.WebSocket;
 
 public class MainActivity extends AppCompatActivity {
+    private WebSocket webSocket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +28,11 @@ public class MainActivity extends AppCompatActivity {
         ChatApi chatApi = new ApiProvider(MainActivity.this).getChatApi();
 
         SharedPreferences sharedPreferences = getSharedPreferences("sgram", MODE_PRIVATE);
-        sharedPreferences.getString("accessToken", "0");
+        sharedPreferences.getString("access_token", "0");
 
         binding.chattingText.setOnClickListener(v -> {
             chatApi.getLiveChatting(sharedPreferences.toString());
-
             startActivity(chatIntent);
         });
     }
-
-
 }

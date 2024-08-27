@@ -22,7 +22,7 @@ public class TokenInterceptor implements Interceptor {
     @NonNull
     @Override
     public Response intercept(Interceptor.Chain chain) throws IOException {
-        String accessToken = sharedPreferences.getString("accessToken", "대체");
+        String accessToken = sharedPreferences.getString("access_token", "");
         Request request = chain.request()
                 .newBuilder()
                 .addHeader("Authorization", "Bearer " + accessToken)

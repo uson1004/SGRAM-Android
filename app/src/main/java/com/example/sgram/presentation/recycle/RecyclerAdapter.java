@@ -35,6 +35,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Custom
         return dataList.size();
     }
 
+    public void addItem(RecyclerData data) {
+        this.dataList.add(data);
+        notifyItemInserted(dataList.size() - 1);
+    }
     public class CustomViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private TextView profileText;

@@ -70,8 +70,8 @@ public class LogInActivity extends AppCompatActivity {
                                 SharedPreferences sharedPreferences = getSharedPreferences("sgram", Context.MODE_PRIVATE);
 
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("accessToken", accessToken);
-                                editor.putString("refreshToken", refreshToken);
+                                editor.putString("access_token", accessToken);
+                                editor.putString("refresh_token", refreshToken);
                                 editor.apply();
 
                                 binding.idTx.setText(response.body().getAccess_token(), TextView.BufferType.EDITABLE);

@@ -1,21 +1,21 @@
 package com.example.sgram.presentation.recycle;
 
 public class RecyclerData {
-    private String profileText;
+    private int profileText;
     private String title;
     private String subText;
 
-    public RecyclerData(String profileText, String title, String subText) {
+    public RecyclerData(int profileText, String title, String subText) {
         this.profileText = profileText;
         this.subText = subText;
         this.title = title;
     }
 
-    public String getProfileText() {
+    public int getProfileText() {
         return profileText;
     }
 
-    public void setProfileText(String profileText) {
+    public void setProfileText(int profileText) {
         this.profileText = profileText;
     }
 
